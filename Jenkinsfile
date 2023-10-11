@@ -9,7 +9,7 @@ pipeline{
         }
         stage("docker build"){
             steps{
-                sh "docker build ./vote/ -t kvaravinda/mydockerapp:v1"
+                sh "sudo docker build ./vote/ -t kvaravinda/mydockerapp:v1"
             }
         }
     }
