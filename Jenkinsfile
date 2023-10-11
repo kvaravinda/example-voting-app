@@ -7,5 +7,10 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/kvaravinda/example-voting-app'
             }
         }
+        stage("docker build"){
+            steps{
+                sh "docker build ./vote/ -t kvaravinda/mydockerapp:v1"
+            }
+        }
     }
 }
