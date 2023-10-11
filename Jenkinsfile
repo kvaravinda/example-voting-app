@@ -13,6 +13,8 @@ pipeline{
         stage("docker build"){
             steps{
                 sh "sudo docker build ./vote/ -t kvaravinda/mydockerapp:latest"
+                sh "echo $DOCKERHUB_CREDENTIALS_PSW"
+                sh "echo $DOCKERHUB_CREDENTIALS_USR"
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh "sudo docker push kvaravinda/mydockerapp:latest"
             }
