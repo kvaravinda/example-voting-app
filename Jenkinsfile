@@ -7,3 +7,5 @@ pipeline{
                 git 'https://github.com/kvaravinda/example-voting-app'
             }
         }
+    }
+}
