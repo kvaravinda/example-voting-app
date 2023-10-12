@@ -14,7 +14,7 @@ pipeline{
             steps{
                 sh "docker build ./vote/ -t kvaravinda/mydockerapp:vikas"
                 //sh 'echo $DOCKERHUB_CREDENTIALS_PSW |docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                withCredentials([string(credentialsId: 'docker-hub-auth', variable: 'dockerhubpwd')]) {
+                withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpasswd')]) {
                 sh "docker login -u kvarvinda -p ${dockerhubpwd}"
                 }
                 sh "docker push kvaravinda/mydockerapp:vikas"
