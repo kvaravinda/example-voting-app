@@ -1,9 +1,9 @@
 currentBuild.displayName = "mydockerwebapp-#"+currentBuild.number
 pipeline{
     agent any
-    environment {
-    DOCKERHUB_CREDENTIALS = credentials('docker-hub-auth')
-  }
+    //environment {
+    //DOCKERHUB_CREDENTIALS = credentials('docker-hub-auth')
+  //}
     stages{
         stage("Git checkout"){
             steps{
@@ -13,7 +13,10 @@ pipeline{
         stage("docker build"){
             steps{
                 sh "docker build ./vote/ -t kvaravinda/mydockerapp:vikas"
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW |docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                //sh 'echo $DOCKERHUB_CREDENTIALS_PSW |docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                withCredentials([string(credentialsId: 'docker-hub-auth', variable: 'dockerhubpwd')]) {
+                sh "docker login -u kvarvinda -p ${dockerhubpwd}"
+                }
                 sh "docker push kvaravinda/mydockerapp:vikas"
             }
         }
